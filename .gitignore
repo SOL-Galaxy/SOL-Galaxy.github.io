@@ -1,9 +1,4 @@
-/*
-!/Markdown/
-!/.github/
-!/.gitignore
-!/package.json
-!/package-lock.json
-/Config/*
-!/theme/
-!config.mts
+node_modules/
+dist/
+.vitepress/dist/
+cache/
