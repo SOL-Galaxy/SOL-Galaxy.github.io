@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "SOL Galaxy"
   text: "A Webpage to storage Ideas of the Galaxy of SOL"
-  tagline: My great project tagline
+  tagline: TEST
   actions:
     - theme: brand
       text: Markdown Examples
