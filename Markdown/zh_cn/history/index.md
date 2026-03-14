@@ -11,12 +11,12 @@
 ### 12月6日
 - [星溯](../characters/index.md#星溯)二十岁生日，独自一人
 - 她决定出发寻找[父亲](../characters/index.md#星溯)与[姐姐](../characters/index.md#星源)
-- 深夜，[星溯](../characters/index.md#星溯)与[叶子](../characters/index.md#叶子)乘坐"信天翁号"前往 [α 星](/../locations/#α-星)
+- 深夜，[星溯](../characters/index.md#星溯)与[叶子](../characters/index.md#叶子)乘坐"信天翁号"前往 [α 星](../locations/index.md#α-星)
 
 ### 12月7日
 - 飞船坠毁
 - 灵裔大暴动爆发
-- [α 星](/../locations/#α-星)与外界通讯全面切断
+- [α 星](../locations/index.md#α-星)与外界通讯全面切断
 
 ### 12月7日—8日
 - 环形山保卫战
@@ -28,11 +28,11 @@
 
 ### 12月9日前后
 - 突袭行动
-- [星溯](../characters/#星溯)激活隐藏力量
+- [星溯](../characters/index.md#星溯)激活隐藏力量
 - 幸存者登上幽影号，离开 α 星
 
 ### 离开 α 星后
-- [菲亚德娜](../characters/#菲亚德娜)现身
+- [菲亚德娜](../characters/index.md#菲亚德娜)现身
 - 黎明之剑与灵裔同盟揭晓
 - 一切远未结束……
 
