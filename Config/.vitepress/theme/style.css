@@ -129,3 +129,34 @@
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
 
+/**
+ * Component: 404 Page Enhancements
+ * -------------------------------------------------------------------------- */
+
+/* 确保 404 页面使用全屏布局 */
+.Layout[data-is-404="true"] {
+  min-height: 100vh;
+}
+
+/* 平滑过渡效果 */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 页面加载动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.VPContent {
+  animation: fadeIn 0.6s ease-out;
+}
+
+
