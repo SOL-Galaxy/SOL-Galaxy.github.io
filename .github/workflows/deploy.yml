@@ -1,4 +1,4 @@
-name: Deploy VitePress site to Pages
+name: Build and Push to dist Branch
 
 on:
   # 在推送到 main 分支时触发
@@ -11,17 +11,10 @@ on:
 
 # 设置 GITHUB_TOKEN 的权限
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 只允许一个并发部署
-concurrency:
-  group: pages
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  # 构建任务
+  # 构建并推送任务
   build:
     runs-on: ubuntu-latest
     steps:
@@ -37,28 +30,28 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --force
 
       - name: Build with VitePress
         run: npm run VitePress:build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: Config/.vitepress/dist
-
-  # 部署任务
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to dist branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 获取或创建 dist 分支
+          git fetch origin dist:dist || git checkout --orphan dist
+          git checkout dist
+          
+          # 清空当前分支内容（保留 .git）
+          git rm -rf . || true
+          
+          # 复制构建产物
+          cp -r Config/.vitepress/dist/* .
+          
+          # 提交并推送
+          git add -A
+          git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git push origin dist
