@@ -13,11 +13,15 @@ export default defineConfig({
     optimizeDeps: {
       exclude: [
         '@nolebase/vitepress-plugin-inline-link-preview/client',
+        '@nolebase/vitepress-plugin-enhanced-readabilities/client',
+        '@nolebase/vitepress-plugin-git-changelog/client',
       ],
     },
     ssr: {
       noExternal: [
         '@nolebase/vitepress-plugin-inline-link-preview',
+        '@nolebase/vitepress-plugin-enhanced-readabilities',
+        '@nolebase/vitepress-plugin-git-changelog',
       ],
     },
     plugins: [
