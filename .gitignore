@@ -1,4 +1,9 @@
-/.vscode/
-/node_modules/
-/Config/.vitepress/cache/
-/Config/.vitepress/dist/
+/*
+!/Markdown/
+!/.github/
+!/.gitignore
+!/package.json
+!/package-lock.json
+/Config/*
+!/theme/
+!config.mts
