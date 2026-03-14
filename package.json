@@ -1,4 +1,8 @@
 {
+  "dependencies": {
+    "echarts": "^5.5.2",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  },
   "devDependencies": {
     "@nolebase/ui": "^2.18.2",
     "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.18.2",

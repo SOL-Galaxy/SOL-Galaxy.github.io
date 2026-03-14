@@ -5,6 +5,7 @@ import DefaultTheme from 'vitepress/theme'
 import './style.css'
 import Layout from './Layout.vue'
 import NotFound from './NotFound.vue'
+import Chart from './Chart.vue'
 
 // Nolebase Plugins
 import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client'
@@ -35,6 +36,9 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // 注册 Inline Link Preview 插件
     app.use(NolebaseInlineLinkPreviewPlugin)
+
+    // 注册图表组件（可在 Markdown 中直接使用 <Chart />）
+    app.component('Chart', Chart)
     
     // Git Changelog 配置
     app.provide(NolebaseGitChangelogInjectionKey, {

@@ -10,7 +10,7 @@
 
 2061年12月7日，积压了数十年愤怒的[灵裔](../creatures/index.md#灵裔)在 α 星所有主要城市的上空同时开启传送门，对[欧加斯财团](../organizations/index.md#欧加斯财团-the-ogas-consortium)统治下的一切发动了规模空前的复仇性清洗。
 
-*详细内容待补充*
+详细内容见[α 星大屠杀](./alpha-star-massacre.md)词条。
 
 ## 环形山保卫战
 

@@ -1,9 +1,11 @@
 import { defineConfig } from 'vitepress'
 import { GitChangelog, GitChangelogMarkdownSection } from '@nolebase/vitepress-plugin-git-changelog/vite'
 import { InlineLinkPreviewElementTransform } from '@nolebase/vitepress-plugin-inline-link-preview/markdown-it'
+import { withMermaid } from "vitepress-plugin-mermaid";
+
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(defineConfig({
   srcDir: "../Markdown",
   base: '/', // GitHub Pages base路径
   cleanUrls: true, // 启用简洁URL
@@ -93,8 +95,14 @@ export default defineConfig({
             items: [
               { text: '世界概览', link: '/zh_cn/world/' },
               { text: '地点与星球', link: '/zh_cn/locations/' },
-              { text: '历史年表', link: '/zh_cn/history/' },
-              { text: '重大事件', link: '/zh_cn/events/' },
+              { text: '历史年表', link: '/zh_cn/history/'},
+              { 
+                text: '重大事件', 
+                link: '/zh_cn/events/',
+                items: [
+                  { text: 'α星大屠杀', link: '/zh_cn/events/alpha-star-massacre' },
+                ]
+               },
             ]
           },
           {
@@ -154,4 +162,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))
