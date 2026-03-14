@@ -4,15 +4,12 @@ layout: home
 
 hero:
   name: "SOL Galaxy"
-  text: "A Webpage to storage Ideas of the Galaxy of SOL"
-  tagline: My great project tagline
+  text: "SOL星系创意中心"
+  tagline: "一个专注于SOL星系/《双星旅记》世界观设定设计的社区"
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: 快速了解
       link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
 
 features:
   - title: Feature A
