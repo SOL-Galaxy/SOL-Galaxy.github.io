@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  srcDir: "..\\Markdown",
+  srcDir: "../Markdown",
   
   title: "SOL Galaxy",
   description: "A Webpage to storage Ideas of the Galaxy of SOL",
