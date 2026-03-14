@@ -94,6 +94,7 @@ export default withMermaid(defineConfig({
             text: '世界设定',
             items: [
               { text: '世界概览', link: '/zh_cn/world/' },
+              { text: '概念与术语', link: '/zh_cn/concepts/' },
               { text: '地点与星球', link: '/zh_cn/locations/' },
               { text: '历史年表', link: '/zh_cn/history/'},
               { 
