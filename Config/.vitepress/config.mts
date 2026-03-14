@@ -23,6 +23,23 @@ export default defineConfig({
             items: [
               { text: '《双星旅记》是什么', link: '/zh_cn/what_is_our_novel' },
             ]
+          },
+          {
+            text: '世界设定',
+            items: [
+              { text: '世界概览', link: '/zh_cn/world/' },
+              { text: '地点与星球', link: '/zh_cn/locations/' },
+              { text: '历史年表', link: '/zh_cn/history/' },
+              { text: '重大事件', link: '/zh_cn/events/' },
+            ]
+          },
+          {
+            text: '角色与势力',
+            items: [
+              { text: '人物角色', link: '/zh_cn/characters/' },
+              { text: '势力组织', link: '/zh_cn/organizations/' },
+              { text: '种族与生物', link: '/zh_cn/creatures/' },
+            ]
           }
         ],
         socialLinks: [
@@ -44,6 +61,23 @@ export default defineConfig({
             text: 'Quick Start',
             items: [
               { text: 'What is Our Novel', link: '/en/what_is_our_novel' },
+            ]
+          },
+          {
+            text: 'World Building',
+            items: [
+              { text: 'World Overview', link: '/en/world/' },
+              { text: 'Locations & Planets', link: '/en/locations/' },
+              { text: 'Historical Timeline', link: '/en/history/' },
+              { text: 'Major Events', link: '/en/events/' },
+            ]
+          },
+          {
+            text: 'Characters & Factions',
+            items: [
+              { text: 'Characters', link: '/en/characters/' },
+              { text: 'Organizations', link: '/en/organizations/' },
+              { text: 'Creatures & Races', link: '/en/creatures/' },
             ]
           }
         ],
