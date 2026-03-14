@@ -103,7 +103,7 @@ const issuesLink = 'https://github.com/SOL-Galaxy/SOL-Galaxy.github.io/issues'
   line-height: 1;
   margin-bottom: 1.5rem;
   color: var(--vp-c-brand-1);
-  font-family: monospace;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .title {

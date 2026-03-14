@@ -1,4 +1,6 @@
 import { defineConfig } from 'vitepress'
+import { GitChangelog, GitChangelogMarkdownSection } from '@nolebase/vitepress-plugin-git-changelog/vite'
+import { InlineLinkPreviewElementTransform } from '@nolebase/vitepress-plugin-inline-link-preview/markdown-it'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,6 +8,62 @@ export default defineConfig({
   
   title: "SOL Galaxy",
   description: "A Webpage to storage Ideas of the Galaxy of SOL",
+  
+  vite: {
+    optimizeDeps: {
+      exclude: [
+        '@nolebase/vitepress-plugin-inline-link-preview/client',
+      ],
+    },
+    ssr: {
+      noExternal: [
+        '@nolebase/vitepress-plugin-inline-link-preview',
+      ],
+    },
+    plugins: [
+      GitChangelog({
+        repoURL: () => 'https://github.com/SOL-Galaxy/SOL-Galaxy.github.io',
+      }),
+      GitChangelogMarkdownSection(),
+    ],
+  },
+  
+  markdown: {
+    config: (md) => {
+      md.use(InlineLinkPreviewElementTransform)
+    }
+  },
+  
+  themeConfig: {
+    lastUpdated: true,
+    editLink: {
+      pattern: 'https://github.com/SOL-Galaxy/SOL-Galaxy.github.io/edit/main/Markdown/:path'
+    },
+    search: {
+      provider: 'local',
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: {
+                buttonText: '搜索文档',
+                buttonAriaLabel: '搜索文档'
+              },
+              modal: {
+                noResultsText: '无法找到相关结果',
+                resetButtonTitle: '清除查询条件',
+                footer: {
+                  selectText: '选择',
+                  navigateText: '切换',
+                  closeText: '关闭'
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   
   locales: {
     root: {
@@ -52,6 +110,9 @@ export default defineConfig({
       lang: 'en-US',
       link: '/en/',
       themeConfig: {
+        search: {
+          provider: 'local'
+        },
         nav: [
           { text: 'Home', link: '/en/' },
           { text: 'Quick Start', link: '/en/what_is_our_novel' }

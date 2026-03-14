@@ -10,6 +10,7 @@ hero:
     - theme: brand
       text: 快速了解
       link: /zh_cn/what_is_our_novel
+      
 
 features:
   - title: 世界观设定
