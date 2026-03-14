@@ -27,7 +27,6 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       'not-found': () => h(NotFound),
       // Git Changelog 组件
-      'doc-before': () => h(NolebaseGitChangelogPlugin),
       // 阅读增强菜单
       'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
       'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
@@ -36,6 +35,9 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // 注册 Inline Link Preview 插件
     app.use(NolebaseInlineLinkPreviewPlugin)
+    app.use(NolebaseGitChangelogPlugin, { 
+      // Configuration...
+    }) 
 
     // 注册图表组件（可在 Markdown 中直接使用 <Chart />）
     app.component('Chart', Chart)

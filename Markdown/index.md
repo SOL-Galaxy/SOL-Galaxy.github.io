@@ -1,5 +1,6 @@
 ---
 layout: home
+changelog: false
 
 hero:
   name: "SOL Galaxy"

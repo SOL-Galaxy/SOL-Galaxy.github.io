@@ -18,7 +18,7 @@
 
 一个以反抗财团暴政为目标的秘密组织，其组织者为[“零”(Zero)](../characters/index.md#零)，成员遍布两颗星球的各个阶层。
 
-详细请见[“零”(Zero)](../characters/index.md#零)词条。
+详细请见[词条](dawn-blade.md)。
 
 ## 灵裔帝国
 

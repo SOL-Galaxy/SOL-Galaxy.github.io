@@ -81,7 +81,7 @@ export default withMermaid(defineConfig({
       themeConfig: {
         nav: [
           { text: '首页', link: '/zh_cn/' },
-          { text: '快速开始', link: '/zh_cn/what_is_our_novel' }
+          { text: '世界观', link: '/zh_cn/what_is_our_novel' }
         ],
         sidebar: [
           {
@@ -119,9 +119,47 @@ export default withMermaid(defineConfig({
                 link: '/zh_cn/organizations/', 
                 items: [
                   { text: '财团', link: '/zh_cn/organizations/the-ogas-consortium' },
+                  { text: '黎明之剑', link: '/zh_cn/organizations/dawn-blade' },
                 ] 
               },
               { text: '种族与生物', link: '/zh_cn/creatures/' },
+            ]
+          },
+          {
+            text: '小说章节',
+            items: [
+              { 
+                text: '双星旅记', 
+                link: '/novels/shuangxingluji/',
+                collapsed: true,
+                items: [
+                  { text: '简介', link: '/novels/shuangxingluji/chapter-01' },
+                  { text: '序幕:起始点', link: '/novels/shuangxingluji/chapter-02' },
+                  { text: 'α星篇·其一：燃烧的访客', link: '/novels/shuangxingluji/chapter-03' },
+                  { text: 'α星篇·其二：灵裔临境', link: '/novels/shuangxingluji/chapter-04' },
+                  { text: 'α星篇·其三：血染长歌', link: '/novels/shuangxingluji/chapter-05' },
+                  { text: 'α星篇·其四：在血与火中', link: '/novels/shuangxingluji/chapter-06' },
+                  { text: 'α星篇·其五：暗潮涌动', link: '/novels/shuangxingluji/chapter-07' },
+                  { text: 'α星篇·其六：迈向黑暗', link: '/novels/shuangxingluji/chapter-08' },
+                  { text: 'α星篇·其七：在黑暗中', link: '/novels/shuangxingluji/chapter-09' },
+                  { text: 'α星篇·其八：『再燃烧吧』', link: '/novels/shuangxingluji/chapter-10' },
+                  { text: 'α星篇·其九：黎明前夜', link: '/novels/shuangxingluji/chapter-11' },
+                  { text: 'α星篇·完结篇1：『来找我们，聆听我们。』', link: '/novels/shuangxingluji/chapter-12' },
+                  { text: 'α星篇·完结篇2：往日种种...', link: '/novels/shuangxingluji/chapter-13' },
+                ]
+              },
+              { 
+                text: '裂痕之火', 
+                link: '/novels/liehenzhihuo/',
+                collapsed: true,
+                items: [
+                  { text: '序章：不存在的人', link: '/novels/liehenzhihuo/chapter-01' },
+                  { text: '第一章：净化之火', link: '/novels/liehenzhihuo/chapter-02' },
+                  { text: '第二章：阴影中的回响', link: '/novels/liehenzhihuo/chapter-03' },
+                  { text: '第三章：血债与筹码', link: '/novels/liehenzhihuo/chapter-04' },
+                  { text: '第四章：第一次回响', link: '/novels/liehenzhihuo/chapter-05' },
+                ]
+              }
             ]
           }
         ],
@@ -164,6 +202,43 @@ export default withMermaid(defineConfig({
               { text: 'Characters', link: '/en/characters/' },
               { text: 'Organizations', link: '/en/organizations/' },
               { text: 'Creatures & Races', link: '/en/creatures/' },
+            ]
+          },
+          {
+            text: 'Novels',
+            items: [
+              { 
+                text: 'Twin Star Journey', 
+                link: '/novels/shuangxingluji/',
+                collapsed: true,
+                items: [
+                  { text: 'Introduction', link: '/novels/shuangxingluji/chapter-01' },
+                  { text: 'Prologue: Starting Point', link: '/novels/shuangxingluji/chapter-02' },
+                  { text: 'α Star Chapter 1: Burning Visitor', link: '/novels/shuangxingluji/chapter-03' },
+                  { text: 'α Star Chapter 2: Spirit Descendants Arrival', link: '/novels/shuangxingluji/chapter-04' },
+                  { text: 'α Star Chapter 3: Blood-Stained Elegy', link: '/novels/shuangxingluji/chapter-05' },
+                  { text: 'α Star Chapter 4: In Blood and Fire', link: '/novels/shuangxingluji/chapter-06' },
+                  { text: 'α Star Chapter 5: Undercurrents Surging', link: '/novels/shuangxingluji/chapter-07' },
+                  { text: 'α Star Chapter 6: Towards Darkness', link: '/novels/shuangxingluji/chapter-08' },
+                  { text: 'α Star Chapter 7: In the Darkness', link: '/novels/shuangxingluji/chapter-09' },
+                  { text: 'α Star Chapter 8: "Burn Again"', link: '/novels/shuangxingluji/chapter-10' },
+                  { text: 'α Star Chapter 9: Before Dawn', link: '/novels/shuangxingluji/chapter-11' },
+                  { text: 'α Star Finale 1: "Come Find Us, Listen to Us."', link: '/novels/shuangxingluji/chapter-12' },
+                  { text: 'α Star Finale 2: The Past...', link: '/novels/shuangxingluji/chapter-13' },
+                ]
+              },
+              { 
+                text: 'Fire of Rift', 
+                link: '/novels/liehenzhihuo/',
+                collapsed: true,
+                items: [
+                  { text: 'Prologue: The Non-Existent', link: '/novels/liehenzhihuo/chapter-01' },
+                  { text: 'Chapter 1: Purifying Fire', link: '/novels/liehenzhihuo/chapter-02' },
+                  { text: 'Chapter 2: Echoes in Shadow', link: '/novels/liehenzhihuo/chapter-03' },
+                  { text: 'Chapter 3: Blood Debt and Bargaining Chips', link: '/novels/liehenzhihuo/chapter-04' },
+                  { text: 'Chapter 4: First Echo', link: '/novels/liehenzhihuo/chapter-05' },
+                ]
+              }
             ]
           }
         ],

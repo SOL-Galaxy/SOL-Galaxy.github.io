@@ -181,4 +181,7 @@ html {
   animation: fadeIn 0.6s ease-out;
 }
 
-
+/* 为插件的背景设置一个与主题匹配的颜色 */
+.vp-nolebase-git-changelog-history-container {
+  background-color: var(--vp-c-bg-soft) !important;
+}
