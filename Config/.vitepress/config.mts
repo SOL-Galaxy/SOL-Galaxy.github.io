@@ -109,8 +109,18 @@ export default withMermaid(defineConfig({
           {
             text: '角色与势力',
             items: [
-              { text: '人物角色', link: '/zh_cn/characters/' },
-              { text: '势力组织', link: '/zh_cn/organizations/' },
+              { text: '人物角色', 
+                link: '/zh_cn/characters/',
+                items: [
+                  { text: '星溯', link: '/zh_cn/characters/xingsu' },
+                ] 
+              },
+              { text: '势力组织', 
+                link: '/zh_cn/organizations/', 
+                items: [
+                  { text: '财团', link: '/zh_cn/organizations/the-ogas-consortium' },
+                ] 
+              },
               { text: '种族与生物', link: '/zh_cn/creatures/' },
             ]
           }

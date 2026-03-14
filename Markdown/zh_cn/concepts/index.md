@@ -13,7 +13,7 @@
 “而且...那些...（哎你过来！说什么呢）...”
 
 
-        ——正欲附和的老调查员和新晋研究员被[财团](../organizations/index.md#欧加斯财团-the-ogas-consortium)的人带走，几天后只剩下了一份“人事变动通知”...
+——正欲附和的老调查员和新晋研究员被[财团](../organizations/index.md#欧加斯财团-the-ogas-consortium)的人带走，几天后只剩下了一份“人事变动通知”...
 
 
 ```mermaid

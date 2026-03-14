@@ -8,6 +8,10 @@
 
 ## 2061年
 
+### 12月4日
+- 灵裔大暴动/[α 星大屠杀](../events/alpha-star-massacre.md)爆发
+- [α 星](../locations/index.md#α-星)与外界通讯全面切断
+
 ### 12月6日
 - [星溯](../characters/index.md#星溯)二十岁生日，独自一人
 - 她决定出发寻找[父亲](../characters/index.md#星溯)与[姐姐](../characters/index.md#星源)
@@ -15,8 +19,6 @@
 
 ### 12月7日
 - 飞船坠毁
-- 灵裔大暴动爆发
-- [α 星](../locations/index.md#α-星)与外界通讯全面切断
 
 ### 12月7日—8日
 - 环形山保卫战
