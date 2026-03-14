@@ -1,4 +1,4 @@
-/.vscode
-/node_modules
-/Config/.vitepress/cache
-/Config/.vitepress/dist
+/.vscode/
+/node_modules/
+/Config/.vitepress/cache/
+/Config/.vitepress/dist/
