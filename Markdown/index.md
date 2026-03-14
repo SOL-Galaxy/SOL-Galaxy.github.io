@@ -12,7 +12,6 @@ hero:
       link: /markdown-examples
 
 features:
-features:
   - title: 世界观设定
     details: 专注于 SOL 星系与《双星旅记》的历史、种族与科技设定
   - title: 社区协作
