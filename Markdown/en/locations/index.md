@@ -10,8 +10,6 @@ The primary human habitat, highly urbanized and the core stronghold of consortiu
 ### Important Facilities
 *To be added*
 
----
-
 ## α Star
 
 A late-developed frontier planet, rich in resources but full of dangers. The planet is home to indigenous inhabitants—the Lingyi. The consortium's long-standing colonial rule here is the trigger point for the entire story's conflict.
@@ -21,7 +19,5 @@ A late-developed frontier planet, rich in resources but full of dangers. The pla
 
 ### The Cursed Land
 *To be added*
-
----
 
 *Content under continuous development...*

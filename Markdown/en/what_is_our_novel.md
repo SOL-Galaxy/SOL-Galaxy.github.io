@@ -10,8 +10,6 @@ As the consortium's capitalist hegemony turns everyone into survival machines, a
 
 This is a story about oppression and resistance, searching and loss, justice and its price.
 
----
-
 ## Explore More
 
 ### 📚 [World Building](./world/)
@@ -27,8 +25,6 @@ The Consortium, Dawn Blade, Lingyi Empire and other major factions
 
 ### 🐺 [Creatures & Races](./creatures/)
 Lingyi races, humans and other creatures
-
----
 
 > *"No matter where you are—at the edge of the world or beyond—I will find you."*
 >

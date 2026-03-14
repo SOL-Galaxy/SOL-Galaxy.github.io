@@ -12,8 +12,6 @@ Information broker, Xing Su's partner and travel companion. Outwardly cynical an
 
 *Detailed content to be added*
 
----
-
 ## Important Characters
 
 ### Neelder
@@ -35,7 +33,5 @@ Lingyi cat clan, the Queen's plenipotentiary envoy.
 An extraterrestrial visitor from another star system.
 
 *Detailed content to be added*
-
----
 
 *Content under continuous development...*

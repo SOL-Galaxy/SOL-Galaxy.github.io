@@ -13,8 +13,6 @@ The actual ruler of the story's world. The consortium controls all basic surviva
 ### Military Forces
 *To be added*
 
----
-
 ## Dawn Blade
 
 A secret organization aimed at resisting the consortium's tyranny, with members across all levels of society on both planets.
@@ -28,8 +26,6 @@ A secret organization aimed at resisting the consortium's tyranny, with members 
 ### Operation Records
 *To be added*
 
----
-
 ## Lingyi Empire
 
 The regime established by the indigenous Lingyi of α Star, which erupted in large-scale resistance after prolonged oppression.
@@ -42,7 +38,5 @@ The regime established by the indigenous Lingyi of α Star, which erupted in lar
 
 ### Tribal Powers
 *To be added*
-
----
 
 *Content under continuous development...*

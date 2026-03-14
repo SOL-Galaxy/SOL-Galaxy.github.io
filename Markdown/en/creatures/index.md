@@ -6,8 +6,6 @@ Intelligent species from Earth who mastered interstellar travel technology durin
 
 *Detailed content to be added*
 
----
-
 ## The Lingyi
 
 Indigenous inhabitants of α Star, resembling humans in appearance but naturally possessing a supernatural ability called "magic."
@@ -27,8 +25,6 @@ Agile and light, skilled in stealth, tracking, and silent assassination.
 
 *Detailed content to be added*
 
----
-
 ## Other Creatures
 
 ### α Star Native Creatures
@@ -36,7 +32,5 @@ Agile and light, skilled in stealth, tracking, and silent assassination.
 
 ### Genetically Modified Creatures
 *To be added*
-
----
 
 *Content under continuous development...*

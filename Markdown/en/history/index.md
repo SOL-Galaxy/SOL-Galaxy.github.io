@@ -5,8 +5,6 @@
 ### October 1st
 Xing Su's 6th birthday, the last complete family moment
 
----
-
 ## 2061
 
 ### December 6th
@@ -36,7 +34,5 @@ Survivor squad decides to infiltrate the Cursed Land research facility to find t
 - Fiadrna appears
 - Dawn Blade and Lingyi alliance revealed
 - Everything is far from over...
-
----
 
 *Content under continuous development...*
