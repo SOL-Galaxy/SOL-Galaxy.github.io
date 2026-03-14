@@ -10,21 +10,20 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '快速开始/Quick Start', link: '/what_is_our_novel' }
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: '快速开始/Quick Start',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: '《双星旅记》是什么', link: '/what_is_our_novel' },
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/SOL-Galaxy/SOL-Galaxy.github.io' }
     ]
   }
 })

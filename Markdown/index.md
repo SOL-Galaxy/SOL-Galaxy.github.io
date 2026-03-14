@@ -12,11 +12,12 @@ hero:
       link: /markdown-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+features:
+  - title: 世界观设定
+    details: 专注于 SOL 星系与《双星旅记》的历史、种族与科技设定
+  - title: 社区协作
+    details: 鼓励创作者交流、共构剧情与互助创作工具
+  - title: 资源与展示
+    details: 汇集插画、文案与示例，便于作品展示与查阅
 ---
 
