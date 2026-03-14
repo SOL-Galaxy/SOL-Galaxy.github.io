@@ -5,6 +5,8 @@ import { InlineLinkPreviewElementTransform } from '@nolebase/vitepress-plugin-in
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "../Markdown",
+  base: '/', // GitHub Pages base路径
+  cleanUrls: true, // 启用简洁URL
   
   title: "SOL Galaxy",
   description: "A Webpage to storage Ideas of the Galaxy of SOL",

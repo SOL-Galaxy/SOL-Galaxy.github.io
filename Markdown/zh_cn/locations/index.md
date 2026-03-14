@@ -2,7 +2,7 @@
 
 ## α 星
 
-曾经的蓝星，开发较晚的边疆星球，自从诅咒之地出现后就被灵裔大规模占领。资源丰富却充满危险。星球上存在本土原住民——[灵裔](/zh_cn/creatures/#灵裔-lingyi)。[财团](/zh_cn/organizations/#欧加斯财团-the-ogas-consortium)通过实验研究出了可以控制[灵裔](zh_cn/creatures/#灵裔-lingyi)意念的方法，长期在此扶植殖民统治，驱使它们为他们工作。这也是是整个故事冲突的引爆点。
+曾经的蓝星，开发较晚的边疆星球，自从诅咒之地出现后就被灵裔大规模占领。资源丰富却充满危险。星球上存在本土原住民——[灵裔](../creatures/index.md#灵裔-lingyi)。[财团](../organizations/index.md#欧加斯财团-the-ogas-consortium)通过实验研究出了可以控制[灵裔](../creatures/index.md#灵裔-lingyi)意念的方法，长期在此扶植殖民统治，驱使它们为他们工作。这也是是整个故事冲突的引爆点。
 
 #### DATA
 *灵裔覆盖比例：80%
@@ -10,7 +10,7 @@
 
 ## β 星
 
-人类主要的居住星，高度城市化，是[财团](/zh_cn/organizations/#欧加斯财团-the-ogas-consortium)权力的核心腹地。故事的主角们大多来自这里。
+人类主要的居住星，高度城市化，是[财团](../organizations/index.md#欧加斯财团-the-ogas-consortium)权力的核心腹地。故事的主角们大多来自这里。
 
 ### 主要城市
 *待补充*

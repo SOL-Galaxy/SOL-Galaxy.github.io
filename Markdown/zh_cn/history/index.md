@@ -9,9 +9,9 @@
 ## 2061年
 
 ### 12月6日
-- [星溯](zh_cn/characters/#星溯)二十岁生日，独自一人
-- 她决定出发寻找[父亲](zh_cn/characters/#星溯)与[姐姐](zh_cn/characters/#星源)
-- 深夜，[星溯](zh_cn/characters/#星溯)与[叶子](zh_cn/characters/#叶子)乘坐"信天翁号"前往 [α 星](/zh_cn/locations/#α-星)
+- [星溯](../characters/index.md#星溯)二十岁生日，独自一人
+- 她决定出发寻找[父亲](zh_cn/characters/index.md#星溯)与[姐姐](zh_cn/characters/index.md#星源)
+- 深夜，[星溯](zh_cn/characters/index.md#星溯)与[叶子](zh_cn/characters/index.md#叶子)乘坐"信天翁号"前往 [α 星](/zh_cn/locations/#α-星)
 
 ### 12月7日
 - 飞船坠毁

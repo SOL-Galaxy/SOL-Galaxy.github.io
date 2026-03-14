@@ -28,13 +28,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 如果不启用 lastUpdated，可以设置为 1
-
+          fetch-depth: 0 # 需要完整历史用于 Git Changelog
+          
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
