@@ -14,7 +14,7 @@ hero:
 
     - theme: brand
       text: 更新频率图
-      link: ../../Config/.vitepress/theme/Chart
+      link: ../Chart.vue
       
 
 features:

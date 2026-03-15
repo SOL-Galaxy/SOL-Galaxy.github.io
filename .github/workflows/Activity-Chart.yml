@@ -8,11 +8,11 @@ env:
   CHART_HEIGHT: 6                                     # 图表高度
   CHART_COLOR: "#42b983"                              # 图表颜色（VitePress 主题色）
   STAT_PERIOD: "W"                                    # 统计维度：W=周，M=月，D=日
-  OUTPUT_DIR: "Config/.vitepress/theme"                           # 图片输出目录（适配 VitePress）
+  OUTPUT_DIR: "Markdown"                           # 图片输出目录（适配 VitePress）
   OUTPUT_NAME: "activity-chart"                       # 图片文件名（无需后缀）
   
-  # 定时任务配置（UTC 时间）
-  CRON_SCHEDULE: "0 12 * * *"                          
+  # 定时任务配置（UTC 时间，北京时间 = UTC+8）
+  CRON_SCHEDULE: "0 12 * * *"                          # 每天 UTC 0 点 = 北京时间 8 点
 
 # ===================== 触发规则 =====================
 on:
