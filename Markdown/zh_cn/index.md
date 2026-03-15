@@ -10,12 +10,7 @@ hero:
   actions:
     - theme: brand
       text: 快速了解
-      link: /zh_cn/what_is_our_novel
-
-    - theme: brand
-      text: 更新频率图
-      link: ../Chart.vue
-      
+      link: /zh_cn/what_is_our_novel 
 
 features:
   - title: 世界观设定
