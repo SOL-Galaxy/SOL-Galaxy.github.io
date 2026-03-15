@@ -16,8 +16,8 @@ hero:
 features:
   - title: 世界观设定
     details: 专注于 SOL 星系与《双星旅记》的历史、种族与科技设定
-  - title: 社区协作
-    details: 鼓励创作者交流、共构剧情与互助创作工具
+  - title: 积极更新
+    details: [更新频率图](../../Config/.vitepress/theme/Chart.vue)
   - title: 资源与展示
     details: 汇集插画、文案与示例，便于作品展示与查阅
 ---
