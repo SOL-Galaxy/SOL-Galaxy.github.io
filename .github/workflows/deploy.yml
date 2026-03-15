@@ -48,8 +48,8 @@ jobs:
           # 清空当前分支内容（保留 .git）
           git rm -rf . || true
           
-          # 复制构建产物
-          cp -r Config/.vitepress/dist/* .
+          # 复制构建产物（包括隐藏文件）
+          cp -r Config/.vitepress/dist/* Config/.vitepress/dist/.* . 2>/dev/null || :
           
           # 提交并推送
           git add -A
