@@ -1,0 +1,138 @@
+name: Generate & Deploy Repository Activity Chart
+
+# ===================== 可配置项 =====================
+env:
+  # 图表基础配置
+  CHART_TITLE: "Repository Commit Activity (Weekly)"  # 图表标题
+  CHART_WIDTH: 12                                     # 图表宽度
+  CHART_HEIGHT: 6                                     # 图表高度
+  CHART_COLOR: "#42b983"                              # 图表颜色（VitePress 主题色）
+  STAT_PERIOD: "W"                                    # 统计维度：W=周，M=月，D=日
+  OUTPUT_DIR: "Config/.vitepress/theme"                           # 图片输出目录（适配 VitePress）
+  OUTPUT_NAME: "activity-chart"                       # 图片文件名（无需后缀）
+  
+  # 定时任务配置（UTC 时间）
+  CRON_SCHEDULE: "0 12 * * *"                          
+
+# ===================== 触发规则 =====================
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "${{ env.OUTPUT_DIR }}/${{ env.OUTPUT_NAME }}.png"
+      - "${{ env.OUTPUT_DIR }}/${{ env.OUTPUT_NAME }}.svg"
+  schedule:
+    - cron: "${{ env.CRON_SCHEDULE }}"
+
+# ===================== 权限 & 并发控制 =====================
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+# ===================== 核心任务 =====================
+jobs:
+  generate-chart:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取仓库完整提交历史
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. 配置 Python 环境
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # 3. 安装依赖（无需本地安装，Workflow 自动处理）
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install gitpython matplotlib pandas
+
+      # 4. 生成图表（Python 脚本内联，无额外文件）
+      - name: Generate Activity Chart
+        run: |
+          python - <<EOF
+          import os
+          import datetime
+          import matplotlib.pyplot as plt
+          import pandas as pd
+          from git import Repo
+
+          # 从环境变量读取配置
+          CHART_TITLE = "${{ env.CHART_TITLE }}"
+          CHART_SIZE = (${{ env.CHART_WIDTH }}, ${{ env.CHART_HEIGHT }})
+          COLOR = "${{ env.CHART_COLOR }}"
+          STAT_PERIOD = "${{ env.STAT_PERIOD }}"
+          OUTPUT_PATH = "${{ env.OUTPUT_DIR }}/${{ env.OUTPUT_NAME }}"
+
+          # 解决 Matplotlib 字体问题
+          plt.rcParams['font.sans-serif'] = ['DejaVu Sans']
+          plt.rcParams['axes.unicode_minus'] = False
+
+          # 读取 Git 提交历史
+          try:
+              repo = Repo(os.getcwd())
+              commits = list(repo.iter_commits('main'))
+              if not commits:
+                  print("⚠️ No commits found in repository.")
+                  exit(0)
+          except Exception as e:
+              print(f"❌ Failed to read git commits: {e}")
+              exit(1)
+
+          # 提取提交时间并统计
+          commit_dates = []
+          for commit in commits:
+              commit_time = datetime.datetime.fromtimestamp(commit.committed_date)
+              commit_dates.append(commit_time)
+
+          df = pd.DataFrame({"date": commit_dates})
+          df["period"] = df["date"].dt.to_period(STAT_PERIOD)
+          period_commits = df.groupby("period").size()
+
+          # 生成图表
+          fig, ax = plt.subplots(figsize=CHART_SIZE)
+          period_commits.plot(kind="bar", ax=ax, color=COLOR, alpha=0.8)
+
+          # 图表样式
+          ax.set_title(CHART_TITLE, fontsize=16, pad=20)
+          ax.set_xlabel("Time Period", fontsize=12)
+          ax.set_ylabel("Number of Commits", fontsize=12)
+          ax.tick_params(axis="x", rotation=45)
+          ax.grid(axis="y", linestyle="--", alpha=0.5)
+          plt.tight_layout()
+
+          # 保存图片
+          os.makedirs("${{ env.OUTPUT_DIR }}", exist_ok=True)
+          plt.savefig(f"{OUTPUT_PATH}.png", dpi=300, bbox_inches="tight")
+          plt.savefig(f"{OUTPUT_PATH}.svg", bbox_inches="tight")
+          print(f"✅ Chart saved to {OUTPUT_PATH}.png/.svg")
+          EOF
+
+      # 5. 提交图片到仓库
+      - name: Commit & Push Chart
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          if git status --porcelain | grep -q '${{ env.OUTPUT_DIR }}/${{ env.OUTPUT_NAME }}'; then
+            git add ${{ env.OUTPUT_DIR }}/${{ env.OUTPUT_NAME }}.*
+            git commit -m "chore: update repository activity chart"
+            git push origin main
+          else
+            echo "No changes to activity chart, skip commit."
+          fi
+
+      # 6. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        if: success()
