@@ -130,7 +130,7 @@ export default withMermaid(defineConfig({
             items: [
               { 
                 text: '双星旅记', 
-                link: '/novels/shuangxingluji/',
+                link: '/zh_cn/novels/shuangxingluji/',
                 collapsed: true,
                 items: [
                   { text: '简介', link: '/zh_cn/novels/shuangxingluji/chapter-01' },
