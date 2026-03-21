@@ -95,7 +95,13 @@ export default withMermaid(defineConfig({
             items: [
               { text: '世界概览', link: '/zh_cn/world/' },
               { text: '概念与术语', link: '/zh_cn/concepts/' },
-              { text: '地点与星球', link: '/zh_cn/locations/' },
+              { 
+                text: '地点与星球', 
+                link: '/zh_cn/locations/', 
+                items: [
+                  { text: '诅咒之地', link: '/zh_cn/locations/cursed-land' },
+                ]
+              },
               { text: '历史年表', link: '/zh_cn/history/'},
               { 
                 text: '重大事件', 
@@ -103,7 +109,7 @@ export default withMermaid(defineConfig({
                 items: [
                   { text: 'α星大屠杀', link: '/zh_cn/events/alpha-star-massacre' },
                   { text: '裂痕之火：黎明之剑的诞生', link: '/zh_cn/events/the-begin-of-dawn-blaze' },
-                  
+                  { text: 'Ogas实验室突袭', link: '/zh_cn/events/ogas-lab-raid' },
                 ]
                },
             ]
