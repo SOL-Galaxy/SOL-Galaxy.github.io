@@ -110,6 +110,7 @@ export default withMermaid(defineConfig({
                   { text: 'α星大屠杀', link: '/zh_cn/events/alpha-star-massacre' },
                   { text: '裂痕之火：黎明之剑的诞生', link: '/zh_cn/events/the-begin-of-dawn-blaze' },
                   { text: 'Ogas实验室突袭', link: '/zh_cn/events/ogas-lab-raid' },
+                  {text:  '星火之触', link: '/zh_cn/events/first-contact' },
                 ]
                },
             ]
