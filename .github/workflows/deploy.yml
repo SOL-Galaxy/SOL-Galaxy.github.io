@@ -51,6 +51,9 @@ jobs:
           # 复制构建产物（包括隐藏文件）
           cp -r Config/.vitepress/dist/* Config/.vitepress/dist/.* . 2>/dev/null || :
           
+          # 创建 .nojekyll 文件（防止 GitHub Pages 使用 Jekyll 处理）
+          touch .nojekyll
+          
           # 提交并推送
           git add -A
           git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
