@@ -20,6 +20,8 @@ import '@nolebase/vitepress-plugin-inline-link-preview/client/style.css'
 import { InjectionKey as NolebaseGitChangelogInjectionKey } from '@nolebase/vitepress-plugin-git-changelog/client'
 import { InjectionKey as NolebaseEnhancedReadabilitiesInjectionKey } from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
 
+import 'markdown-worldview/style.css'
+
 export default {
   extends: DefaultTheme,
   Layout: () => {

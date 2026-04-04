@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { GitChangelog, GitChangelogMarkdownSection } from '@nolebase/vitepress-plugin-git-changelog/vite'
 import { InlineLinkPreviewElementTransform } from '@nolebase/vitepress-plugin-inline-link-preview/markdown-it'
 import { withMermaid } from "vitepress-plugin-mermaid";
+import {markdownWorldviewPlugin} from 'markdown-worldview'
 
 
 // https://vitepress.dev/reference/site-config
@@ -38,6 +39,9 @@ export default withMermaid(defineConfig({
   
   markdown: {
     config: (md) => {
+        md.use(markdownWorldviewPlugin, {
+        debug: true,  // 启用调试模式
+      })
       md.use(InlineLinkPreviewElementTransform)
     }
   },

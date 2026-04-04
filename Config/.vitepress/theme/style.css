@@ -185,3 +185,135 @@ html {
 .vp-nolebase-git-changelog-history-container {
   background-color: var(--vp-c-bg-soft) !important;
 }
+
+/**
+ * Markdown-WorldView 主题定制
+ * -------------------------------------------------------------------------- */
+
+/* Light Mode - 亮色模式 */
+:root {
+  /* 基础颜色 */
+  --mw-primary-color: var(--vp-c-brand-3);      /* 使用 VitePress 品牌色 */
+  --mw-bg-color: var(--vp-c-bg);                /* 背景色 */
+  --mw-text-color: var(--vp-c-text-1);          /* 文本颜色 */
+  --mw-text-muted: var(--vp-c-text-2);          /* 次要文本颜色 */
+  --mw-border-color: var(--vp-c-divider);       /* 边框颜色 */
+  
+  /* 状态颜色 */
+  --mw-pos-color: #16a34a;                      /* 正面元素（盟友、增益） */
+  --mw-neg-color: #dc2626;                      /* 负面元素（敌人、减益） */
+  --mw-neu-color: #6b7280;                      /* 中性元素 */
+  
+  /* 物品稀有度颜色 */
+  --mw-rarity-common: #9ca3af;                  /* 普通物品 - 灰色 */
+  --mw-rarity-rare: #3b82f6;                    /* 稀有物品 - 蓝色 */
+  --mw-rarity-epic: #a855f7;                    /* 史诗物品 - 紫色 */
+  --mw-rarity-legendary: #f59e0b;               /* 传说物品 - 金色 */
+  
+  /* 间距和圆角 */
+  --mw-spacing-sm: 8px;
+  --mw-spacing-md: 16px;
+  --mw-spacing-lg: 24px;
+  --mw-radius-sm: 4px;
+  --mw-radius-md: 8px;
+  --mw-radius-lg: 12px;
+  
+  /* 阴影 */
+  --mw-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --mw-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --mw-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Card 组件 */
+  --mw-card-avatar-size: 120px;                 /* 头像大小 */
+  
+  /* Numerical 组件 */
+  --mw-numerical-icon-size: 2rem;               /* 数值面板图标大小 */
+  --mw-numerical-progress-height: 8px;          /* 进度条高度 */
+  
+  /* Inventory 组件 */
+  --mw-inventory-columns: 4;                    /* 物品网格列数 */
+  --mw-inventory-icon-size: 48px;               /* 物品图标大小 */
+  
+  /* 错误提示样式（开发模式） */
+  --mw-error-border: #dc2626;
+  --mw-error-bg: #fee2e2;
+  --mw-error-text: #dc2626;
+  
+  /* 信息提示样式（生产模式） */
+  --mw-info-border: #d1d5db;
+  --mw-info-bg: #f9fafb;
+  --mw-info-text: #6b7280;
+}
+
+/* Dark Mode - 深色模式 */
+.dark {
+  /* 基础颜色 */
+  --mw-primary-color: var(--vp-c-brand-2);      /* 深色模式下使用更亮的品牌色 */
+  --mw-bg-color: var(--vp-c-bg);                
+  --mw-text-color: var(--vp-c-text-1);          
+  --mw-text-muted: var(--vp-c-text-2);          
+  --mw-border-color: var(--vp-c-divider);       
+  
+  /* 状态颜色（深色模式下调整为更柔和的颜色） */
+  --mw-pos-color: #4ade80;                      /* 绿色更亮 */
+  --mw-neg-color: #f87171;                      /* 红色更亮 */
+  --mw-neu-color: #9ca3af;                      /* 灰色更亮 */
+  
+  /* 物品稀有度颜色（深色模式） */
+  --mw-rarity-common: #6b7280;                  
+  --mw-rarity-rare: #60a5fa;                    
+  --mw-rarity-epic: #c084fc;                    
+  --mw-rarity-legendary: #fbbf24;               
+  
+  /* 阴影（深色模式使用更深的阴影） */
+  --mw-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --mw-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --mw-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  
+  /* 错误提示样式（深色模式） */
+  --mw-error-border: #f87171;
+  --mw-error-bg: #450a0a;
+  --mw-error-text: #fecaca;
+  
+  /* 信息提示样式（深色模式） */
+  --mw-info-border: #4b5563;
+  --mw-info-bg: #1f2937;
+  --mw-info-text: #d1d5db;
+}
+
+/* 响应式设计 - 平板和桌面 */
+@media (min-width: 768px) {
+  :root {
+    --mw-card-avatar-size: 140px;               /* 大屏幕上头像更大 */
+    --mw-inventory-columns: 6;                  /* 大屏幕上显示更多列 */
+  }
+}
+
+/* 响应式设计 - 手机 */
+@media (max-width: 640px) {
+  :root {
+    --mw-card-avatar-size: 80px;                /* 小屏幕上头像更小 */
+    --mw-inventory-columns: 2;                  /* 小屏幕上显示更少列 */
+    --mw-inventory-icon-size: 40px;             /* 小屏幕上图标更小 */
+  }
+}
+
+/* 自定义样式：让卡片悬停效果更明显 */
+.mw-card.mw-clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mw-shadow-lg);
+}
+
+/* 自定义样式：传说物品加强视觉效果 */
+.mw-rarity-legendary {
+  animation: legendaryGlow 2s ease-in-out infinite;
+}
+
+@keyframes legendaryGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--mw-rarity-legendary);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--mw-rarity-legendary);
+  }
+}
