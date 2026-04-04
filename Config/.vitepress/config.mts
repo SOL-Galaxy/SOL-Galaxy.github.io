@@ -10,6 +10,7 @@ export default withMermaid(defineConfig({
   srcDir: "../Markdown",
   base: '/', // GitHub Pages base路径
   cleanUrls: true, // 启用简洁URL
+  head: [["link", { rel: "icon", href: "/images/logos/DawnBlade-no-logo.png" }]],
   
   title: "SOL Galaxy",
   description: "A Webpage to storage Ideas of the Galaxy of SOL",
@@ -98,7 +99,13 @@ export default withMermaid(defineConfig({
             text: '世界设定',
             items: [
               { text: '世界概览', link: '/zh_cn/world/' },
-              { text: '概念与术语', link: '/zh_cn/concepts/' },
+              { 
+                text: '概念与术语',
+                 link: '/zh_cn/concepts/', 
+                items: [
+                  { text: '技术', link: '/zh_cn/concepts/technology' },
+                ]
+               },
               { 
                 text: '地点与星球', 
                 link: '/zh_cn/locations/', 
