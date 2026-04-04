@@ -20,6 +20,7 @@ link: /zh_cn/characters/xingyuan
 
 ```card
 name: 叶子
+avatar: /images/characters/yezi.png
 description: 情报贩子，性别女，星溯的搭档与旅伴。表面玩世不恭、嗜好危险，实则消息灵通、身手不凡。
 dictum: "危险？那只是生活的调味料"
 tags: [主角, 情报贩子, 搭档]
@@ -60,7 +61,7 @@ link: /zh_cn/characters/feiyaedena
 ```
 
 ```card
-name: "零"(Zero)
+name: "“零”(Zero)"
 description: 外传《裂痕之火》的主角，反抗组织黎明之剑的创始人和领导者，代号"零"。本名夜隼，曾是第三街区的幽灵黑客。旧书店被财团"净化"后，他以复仇者之姿创立并领导黎明之剑，一个以反抗财团暴政为目标的秘密组织。
 dictum: "黎明之前，必有长夜"
 tags: [重要角色, 黎明之剑, 创始人, 黑客, 外传主角]
