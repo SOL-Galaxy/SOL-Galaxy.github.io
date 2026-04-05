@@ -103,7 +103,22 @@ export default withMermaid(defineConfig({
                 text: '概念与术语',
                  link: '/zh_cn/concepts/', 
                 items: [
-                  { text: '技术', link: '/zh_cn/concepts/technology' },
+                  { 
+                    text: '技术',
+                    link: '/zh_cn/concepts/technology/index', 
+                    items: [
+                      { text: '生产学', link: '/zh_cn/concepts/technology/production' },
+                      { text: '能源学', link: '/zh_cn/concepts/technology/energy' },
+                      { text: '材料学', link: '/zh_cn/concepts/technology/materials' },
+                      { text: '计算学', link: '/zh_cn/concepts/technology/computing' },
+                      { text: '武器科技', link: '/zh_cn/concepts/technology/weapons' },
+                      { text: '装甲技术', link: '/zh_cn/concepts/technology/armor' },
+                      { text: '生物学', link: '/zh_cn/concepts/technology/biology' },
+                      { text: '殖民学', link: '/zh_cn/concepts/technology/colonization' },
+                      { text: '熵澜能量学', link: '/zh_cn/concepts/technology/entropic' },
+                      { text: '总结与反思', link: '/zh_cn/concepts/technology/summary' }
+                    ]
+                  },
                 ]
                },
               { 
@@ -111,6 +126,7 @@ export default withMermaid(defineConfig({
                 link: '/zh_cn/locations/', 
                 items: [
                   { text: '诅咒之地', link: '/zh_cn/locations/cursed-land' },
+                  { text: 'β星', link: '/zh_cn/locations/beta-star' }, 
                 ]
               },
               { text: '历史年表', link: '/zh_cn/history/'},

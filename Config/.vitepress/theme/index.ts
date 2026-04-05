@@ -6,6 +6,7 @@ import './style.css'
 import Layout from './Layout.vue'
 import NotFound from './NotFound.vue'
 import Chart from './Chart.vue'
+import Settings from './Settings.vue'
 
 // Nolebase Plugins
 import { NolebaseGitChangelogPlugin } from '@nolebase/vitepress-plugin-git-changelog/client'
@@ -22,15 +23,20 @@ import { InjectionKey as NolebaseEnhancedReadabilitiesInjectionKey } from '@nole
 
 import 'markdown-worldview/style.css'
 
+// 设置管理
+import { createSettingsAPI } from './useSettings'
+
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       'not-found': () => h(NotFound),
-      // Git Changelog 组件
-      // 阅读增强菜单
-      'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
+      // 阅读增强菜单 + 设置按钮
+      'nav-bar-content-after': () => [
+        h(NolebaseEnhancedReadabilitiesMenu),
+        h(Settings)
+      ],
       'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
     })
   },
@@ -40,6 +46,11 @@ export default {
     app.use(NolebaseGitChangelogPlugin, { 
       // Configuration...
     }) 
+
+    // 创建并挂载全局设置 API
+    if (typeof window !== 'undefined') {
+      (window as any).__VITEPRESS_SETTINGS__ = createSettingsAPI()
+    }
 
     // 注册图表组件（可在 Markdown 中直接使用 <Chart />）
     app.component('Chart', Chart)
