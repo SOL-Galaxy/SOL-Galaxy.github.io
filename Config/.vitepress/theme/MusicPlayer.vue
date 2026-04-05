@@ -237,6 +237,7 @@ const {
   loopModeIcon,
   loopModeText,
   togglePlay,
+  pause,
   next,
   prev,
   seek,
@@ -319,12 +320,29 @@ function playTrack(index: number) {
  * 监听设置变化
  */
 watch(() => getSetting('enableMusicPlayer'), (value) => {
-  enabled.value = value !== false // 默认为 true
+  const newEnabled = value !== false // 默认为 true
+  
+  // 如果从启用变为禁用，暂停播放
+  if (enabled.value && !newEnabled && isPlaying.value) {
+    pause()
+  }
+  
+  enabled.value = newEnabled
 }, { immediate: true })
 
-// 组件挂载时加载播放列表
+// 组件挂载时，只有在启用的情况下才加载播放列表
 onMounted(() => {
-  loadPlaylist()
+  // 等待 enabled 状态初始化完成
+  const checkEnabled = () => {
+    const isEnabled = getSetting('enableMusicPlayer') !== false
+    console.log('Music Player Enabled:', isEnabled)
+    if (isEnabled) {
+      loadPlaylist()
+    }
+  }
+  
+  // 延迟一下确保设置已加载
+  setTimeout(checkEnabled, 100)
 })
 </script>
 
@@ -344,11 +362,6 @@ onMounted(() => {
   max-width: 400px;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-}
-
-.music-player:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
 }
 
 /* 歌曲信息 */
@@ -400,10 +413,6 @@ onMounted(() => {
   transition: all 0.2s;
 }
 
-.music-progress-bar:hover {
-  height: 8px;
-}
-
 .music-progress-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
@@ -422,10 +431,6 @@ onMounted(() => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transition: opacity 0.2s;
-}
-
-.music-progress-bar:hover .music-progress-thumb {
-  opacity: 1;
 }
 
 /* 控制按钮 */
@@ -450,12 +455,6 @@ onMounted(() => {
   transition: all 0.25s;
 }
 
-.music-btn:hover:not(:disabled) {
-  background: var(--vp-c-brand-1);
-  color: white;
-  transform: scale(1.1);
-}
-
 .music-btn:active:not(:disabled) {
   transform: scale(0.95);
 }
@@ -470,11 +469,6 @@ onMounted(() => {
   height: 44px;
   background: var(--vp-c-brand-1);
   color: white;
-}
-
-.music-btn-play:hover {
-  background: var(--vp-c-brand-2);
-  transform: scale(1.15);
 }
 
 /* 循环模式按钮 */
@@ -538,10 +532,6 @@ onMounted(() => {
   transition: all 0.2s;
 }
 
-.volume-input::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-}
-
 .volume-input::-moz-range-thumb {
   width: 14px;
   height: 14px;
@@ -550,10 +540,6 @@ onMounted(() => {
   cursor: pointer;
   border: none;
   transition: all 0.2s;
-}
-
-.volume-input::-moz-range-thumb:hover {
-  transform: scale(1.2);
 }
 
 .volume-value {
@@ -623,10 +609,6 @@ onMounted(() => {
   border-radius: 3px;
 }
 
-.music-playlist-items::-webkit-scrollbar-thumb:hover {
-  background: var(--vp-c-brand-2);
-}
-
 .music-playlist-item {
   display: flex;
   align-items: center;
@@ -635,10 +617,6 @@ onMounted(() => {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
-}
-
-.music-playlist-item:hover {
-  background: var(--vp-c-bg-soft);
 }
 
 .music-playlist-item.active {
@@ -764,6 +742,49 @@ onMounted(() => {
 .volume-fade-leave-to {
   opacity: 0;
   transform: translateX(-50%) translateY(5px);
+}
+
+/* 只在支持 hover 的设备上应用悬停效果 */
+@media (hover: hover) {
+  .music-player:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .music-progress-bar:hover {
+    height: 8px;
+  }
+
+  .music-progress-bar:hover .music-progress-thumb {
+    opacity: 1;
+  }
+
+  .music-btn:hover:not(:disabled) {
+    background: var(--vp-c-brand-1);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  .music-btn-play:hover {
+    background: var(--vp-c-brand-2);
+    transform: scale(1.15);
+  }
+
+  .volume-input::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .volume-input::-moz-range-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .music-playlist-items::-webkit-scrollbar-thumb:hover {
+    background: var(--vp-c-brand-2);
+  }
+
+  .music-playlist-item:hover {
+    background: var(--vp-c-bg-soft);
+  }
 }
 
 /* 响应式 - 移动端 */

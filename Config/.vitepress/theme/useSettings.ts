@@ -18,16 +18,9 @@ const defaultConfig: SettingsConfig = {
       description: '自定义你的阅读体验',
       items: [
         {
-          key: 'autoRedirectToLastPage',
-          label: '自动跳转到上次页面',
-          description: '打开网站时自动跳转到上次访问的页面',
-          type: 'boolean',
-          defaultValue: true
-        },
-        {
-          key: 'autoRestoreScrollPosition',
-          label: '自动恢复滚动位置',
-          description: '进入文章时自动滚动到上次阅读的位置',
+          key: 'enableReadingProgress',
+          label: '启用阅读进度记忆',
+          description: '记住最后访问的页面及其滚动位置，下次打开时自动跳转并恢复',
           type: 'boolean',
           defaultValue: true
         }

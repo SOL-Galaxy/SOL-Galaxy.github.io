@@ -3,7 +3,7 @@
  * 管理音乐播放、播放列表和播放状态
  */
 
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onUnmounted } from 'vue'
 
 // 音乐信息接口
 export interface MusicTrack {
@@ -480,11 +480,6 @@ export function useMusicPlayer() {
   watch(playlist, () => {
     savePlaylist()
   }, { deep: true })
-
-  // 组件挂载时初始化
-  onMounted(() => {
-    loadPlaylist()
-  })
 
   // 组件卸载时清理
   onUnmounted(() => {

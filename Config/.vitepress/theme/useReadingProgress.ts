@@ -1,8 +1,7 @@
 /**
  * 阅读进度跟踪 Composable
  * 
- * 功能1（主）：记录最后访问的页面，下次打开网站时自动跳转
- * 功能2（次）：记录每个页面的滚动位置，返回页面时自动恢复
+ * 功能：记录最后访问的页面及其滚动位置，下次打开网站时自动跳转并恢复滚动位置
  */
 
 import { ref } from 'vue'
@@ -11,13 +10,8 @@ import { inBrowser } from 'vitepress'
 
 // localStorage 键名
 const LAST_PAGE_KEY = 'vitepress-last-visited-page'
-const SCROLL_PROGRESS_KEY = 'vitepress-scroll-progress'
+const LAST_SCROLL_KEY = 'vitepress-last-scroll-position'
 const SETTINGS_KEY = 'vitepress-settings'
-
-// 滚动位置记录
-interface ScrollProgress {
-  [path: string]: number
-}
 
 /**
  * 节流函数
@@ -49,37 +43,19 @@ function throttle<T extends (...args: any[]) => any>(
 }
 
 /**
- * 检查功能1是否启用（自动跳转到上次页面）
+ * 检查阅读进度功能是否启用（包括自动跳转和滚动恢复）
  */
-function isRedirectEnabled(): boolean {
+function isReadingProgressEnabled(): boolean {
   if (!inBrowser) return false
   
   try {
     const settings = localStorage.getItem(SETTINGS_KEY)
     if (settings) {
       const parsed = JSON.parse(settings)
-      return parsed.autoRedirectToLastPage !== false
+      return parsed.enableReadingProgress !== false
     }
   } catch (error) {
-    console.error('[阅读进度] 读取跳转设置失败:', error)
-  }
-  return true
-}
-
-/**
- * 检查功能2是否启用（自动恢复滚动位置）
- */
-function isScrollRestoreEnabled(): boolean {
-  if (!inBrowser) return false
-  
-  try {
-    const settings = localStorage.getItem(SETTINGS_KEY)
-    if (settings) {
-      const parsed = JSON.parse(settings)
-      return parsed.autoRestoreScrollPosition !== false
-    }
-  } catch (error) {
-    console.error('[阅读进度] 读取滚动恢复设置失败:', error)
+    console.error('[阅读进度] 读取设置失败:', error)
   }
   return true
 }
@@ -96,10 +72,10 @@ export function useReadingProgress() {
   let scrollHandler: (() => void) | null = null
 
   /**
-   * 功能1: 保存最后访问的页面
+   * 保存最后访问的页面
    */
   function saveLastPage(path: string) {
-    if (!inBrowser || !isRedirectEnabled()) return
+    if (!inBrowser || !isReadingProgressEnabled()) return
     
     try {
       localStorage.setItem(LAST_PAGE_KEY, path)
@@ -110,10 +86,10 @@ export function useReadingProgress() {
   }
 
   /**
-   * 功能1: 获取最后访问的页面
+   * 获取最后访问的页面
    */
   function getLastPage(): string | null {
-    if (!inBrowser || !isRedirectEnabled()) return null
+    if (!inBrowser || !isReadingProgressEnabled()) return null
     
     try {
       return localStorage.getItem(LAST_PAGE_KEY)
@@ -124,11 +100,11 @@ export function useReadingProgress() {
   }
 
   /**
-   * 功能1: 跳转到最后访问的页面
+   * 跳转到最后访问的页面
    * 仅当打开首页时执行
    */
   function redirectToLastPage(): boolean {
-    if (!inBrowser || !isRedirectEnabled() || hasRedirected.value) return false
+    if (!inBrowser || !isReadingProgressEnabled() || hasRedirected.value) return false
     
     const currentPath = route.path
     const lastPage = getLastPage()
@@ -156,32 +132,27 @@ export function useReadingProgress() {
   }
 
   /**
-   * 功能2: 保存滚动位置
+   * 保存滚动位置（仅保存最后访问页面的位置）
    */
-  function saveScrollPosition(path: string, scrollY: number) {
-    if (!inBrowser || !isScrollRestoreEnabled()) return
+  function saveScrollPosition(scrollY: number) {
+    if (!inBrowser || !isReadingProgressEnabled()) return
     
     try {
-      const stored = localStorage.getItem(SCROLL_PROGRESS_KEY)
-      const progress: ScrollProgress = stored ? JSON.parse(stored) : {}
-      progress[path] = scrollY
-      localStorage.setItem(SCROLL_PROGRESS_KEY, JSON.stringify(progress))
+      localStorage.setItem(LAST_SCROLL_KEY, scrollY.toString())
     } catch (error) {
       console.error('[阅读进度] 保存滚动位置失败:', error)
     }
   }
 
   /**
-   * 功能2: 获取滚动位置
+   * 获取滚动位置
    */
-  function getScrollPosition(path: string): number | null {
-    if (!inBrowser || !isScrollRestoreEnabled()) return null
+  function getScrollPosition(): number | null {
+    if (!inBrowser || !isReadingProgressEnabled()) return null
     
     try {
-      const stored = localStorage.getItem(SCROLL_PROGRESS_KEY)
-      if (!stored) return null
-      const progress: ScrollProgress = JSON.parse(stored)
-      return progress[path] ?? null
+      const stored = localStorage.getItem(LAST_SCROLL_KEY)
+      return stored ? parseInt(stored, 10) : null
     } catch (error) {
       console.error('[阅读进度] 读取滚动位置失败:', error)
       return null
@@ -189,15 +160,15 @@ export function useReadingProgress() {
   }
 
   /**
-   * 功能2: 恢复滚动位置
+   * 恢复滚动位置（仅恢复最后访问页面的位置）
    */
-  function restoreScrollPosition(path: string) {
-    if (!inBrowser || !isScrollRestoreEnabled() || hasRestored.value) return
+  function restoreScrollPosition() {
+    if (!inBrowser || !isReadingProgressEnabled() || hasRestored.value) return
     
-    const scrollY = getScrollPosition(path)
+    const scrollY = getScrollPosition()
     
     if (scrollY && scrollY > 0) {
-      console.log('[阅读进度] 📜 恢复滚动位置:', scrollY, 'px for', path)
+      console.log('[阅读进度] 📜 恢复滚动位置:', scrollY, 'px')
       hasRestored.value = true
       
       // 多次尝试确保内容已加载
@@ -221,7 +192,7 @@ export function useReadingProgress() {
       
       setTimeout(tryRestore, 300)
     } else {
-      console.log('[阅读进度] 无保存的滚动位置:', path)
+      console.log('[阅读进度] 无保存的滚动位置')
     }
   }
 
@@ -229,7 +200,7 @@ export function useReadingProgress() {
    * 设置滚动监听
    */
   function setupScrollListener() {
-    if (!inBrowser || !isScrollRestoreEnabled()) return
+    if (!inBrowser || !isReadingProgressEnabled()) return
     
     // 移除旧监听器
     if (scrollHandler) {
@@ -239,7 +210,7 @@ export function useReadingProgress() {
     // 使用节流，每 500ms 最多保存一次
     scrollHandler = throttle(() => {
       const scrollY = window.scrollY
-      saveScrollPosition(route.path, scrollY)
+      saveScrollPosition(scrollY)
     }, 500)
     
     window.addEventListener('scroll', scrollHandler, { passive: true })
@@ -256,14 +227,13 @@ export function useReadingProgress() {
     // 重置状态
     hasRestored.value = false
     
-    // 功能1: 保存为最后访问的页面（如果启用）
-    if (isRedirectEnabled()) {
-      saveLastPage(path)
-    }
+    // 保存为最后访问的页面
+    saveLastPage(path)
     
-    // 功能2: 恢复滚动位置（如果启用）
-    if (isScrollRestoreEnabled()) {
-      restoreScrollPosition(path)
+    // 恢复滚动位置（仅当返回到最后访问的页面时）
+    const lastPage = getLastPage()
+    if (lastPage === path) {
+      restoreScrollPosition()
     }
   }
 
@@ -275,29 +245,19 @@ export function useReadingProgress() {
     
     console.log('[阅读进度] 🎯 初始化，当前页面:', route.path)
     
-    let didRedirect = false
-    
-    // 功能1: 尝试跳转到上次访问的页面（如果启用）
-    if (isRedirectEnabled()) {
-      didRedirect = redirectToLastPage()
-    }
+    // 尝试跳转到上次访问的页面
+    const didRedirect = redirectToLastPage()
     
     if (!didRedirect) {
-      // 没有跳转，记录当前页面（如果功能1启用）
-      if (isRedirectEnabled()) {
-        saveLastPage(route.path)
-      }
+      // 没有跳转，记录当前页面
+      saveLastPage(route.path)
       
-      // 恢复滚动位置（如果功能2启用）
-      if (isScrollRestoreEnabled()) {
-        restoreScrollPosition(route.path)
-      }
+      // 恢复滚动位置
+      restoreScrollPosition()
     }
     
-    // 功能2: 设置滚动监听（如果启用）
-    if (isScrollRestoreEnabled()) {
-      setupScrollListener()
-    }
+    // 设置滚动监听
+    setupScrollListener()
   }
 
   /**
@@ -308,7 +268,7 @@ export function useReadingProgress() {
     
     try {
       localStorage.removeItem(LAST_PAGE_KEY)
-      localStorage.removeItem(SCROLL_PROGRESS_KEY)
+      localStorage.removeItem(LAST_SCROLL_KEY)
       console.log('[阅读进度] 已清除所有记录')
     } catch (error) {
       console.error('[阅读进度] 清除失败:', error)

@@ -74,6 +74,18 @@
 
           <!-- 底部操作栏 -->
           <div class="vp-settings-footer">
+            <button 
+              class="vp-settings-action vp-settings-save" 
+              @click="handleSave"
+              :disabled="!hasUnsavedChanges"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                <polyline points="17 21 17 13 7 13 7 21"/>
+                <polyline points="7 3 7 8 15 8"/>
+              </svg>
+              {{ hasUnsavedChanges ? '保存更改' : '无更改' }}
+            </button>
             <button class="vp-settings-action" @click="handleExport">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -114,11 +126,24 @@ const { config, exportSettings, importSettings, resetSettings, getSetting, setSe
 // 面板状态
 const isOpen = ref(false)
 
+// 未保存的更改追踪
+const hasUnsavedChanges = ref(false)
+const pendingSettings = ref<Record<string, any>>({})
+
 function togglePanel() {
   isOpen.value = !isOpen.value
 }
 
 function closePanel() {
+  // 检查是否有未保存的更改
+  if (hasUnsavedChanges.value) {
+    if (!confirm('你有未保存的更改，确定要关闭吗？')) {
+      return
+    }
+    // 用户确认关闭，清空待保存的更改
+    pendingSettings.value = {}
+    hasUnsavedChanges.value = false
+  }
   isOpen.value = false
 }
 
@@ -177,20 +202,53 @@ function handleReset() {
 }
 
 /**
- * 处理开关切换
+ * 处理开关切换（不立即保存）
  */
 function handleToggle(key: string, event: Event) {
   const checked = (event.target as HTMLInputElement).checked
-  setSetting(key, checked)
-  console.log(`[Settings] ${key} = ${checked}`)
+  pendingSettings.value[key] = checked
+  hasUnsavedChanges.value = true
+  console.log(`[Settings] ${key} = ${checked} (pending)`)
 }
 
 /**
- * 获取设置值（带默认值）
+ * 获取设置值（优先使用待保存的值）
  */
 function getSettingValue(key: string, defaultValue: any): any {
+  // 如果有待保存的值，优先使用
+  if (key in pendingSettings.value) {
+    return pendingSettings.value[key]
+  }
   const value = getSetting(key)
   return value !== undefined ? value : defaultValue
+}
+
+/**
+ * 保存所有更改并刷新页面
+ */
+function handleSave() {
+  if (!hasUnsavedChanges.value) {
+    return
+  }
+
+  try {
+    // 保存所有待保存的设置
+    for (const [key, value] of Object.entries(pendingSettings.value)) {
+      setSetting(key, value)
+    }
+    
+    console.log('[Settings] Settings saved, reloading page...')
+    
+    // 清空待保存状态
+    pendingSettings.value = {}
+    hasUnsavedChanges.value = false
+    
+    // 刷新页面
+    window.location.reload()
+  } catch (error) {
+    console.error('[Settings] Failed to save settings:', error)
+    alert('保存失败，请查看控制台')
+  }
 }
 
 /**
@@ -526,6 +584,26 @@ function handleClearProgress() {
   background-color: var(--vp-c-default-soft);
 }
 
+.vp-settings-action.vp-settings-save {
+  background-color: var(--vp-c-brand-1);
+  color: white;
+  border-color: var(--vp-c-brand-1);
+  font-weight: 500;
+}
+
+.vp-settings-action.vp-settings-save:hover:not(:disabled) {
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+}
+
+.vp-settings-action.vp-settings-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-3);
+  border-color: var(--vp-c-divider);
+}
+
 .vp-settings-action.vp-settings-danger:hover {
   color: var(--vp-c-danger-1);
   border-color: var(--vp-c-danger-1);
@@ -555,11 +633,16 @@ function handleClearProgress() {
   }
 
   .vp-settings-footer {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .vp-settings-action {
-    width: 100%;
+    min-width: calc(50% - 4px);
+  }
+
+  .vp-settings-action.vp-settings-save {
+    flex-basis: 100%;
+    order: -1;
   }
 }
 </style>
