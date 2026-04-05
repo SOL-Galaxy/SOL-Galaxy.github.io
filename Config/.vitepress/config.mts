@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { GitChangelog, GitChangelogMarkdownSection } from '@nolebase/vitepress-plugin-git-changelog/vite'
 import { InlineLinkPreviewElementTransform } from '@nolebase/vitepress-plugin-inline-link-preview/markdown-it'
 import { withMermaid } from "vitepress-plugin-mermaid";
+import {markdownWorldviewPlugin} from 'markdown-worldview'
 
 
 // https://vitepress.dev/reference/site-config
@@ -9,6 +10,7 @@ export default withMermaid(defineConfig({
   srcDir: "../Markdown",
   base: '/', // GitHub Pages base路径
   cleanUrls: true, // 启用简洁URL
+  head: [["link", { rel: "icon", href: "/images/logos/DawnBlade-no-logo.png" }]],
   
   title: "SOL Galaxy",
   description: "A Webpage to storage Ideas of the Galaxy of SOL",
@@ -38,6 +40,9 @@ export default withMermaid(defineConfig({
   
   markdown: {
     config: (md) => {
+        md.use(markdownWorldviewPlugin, {
+        debug: true,  // 启用调试模式
+      })
       md.use(InlineLinkPreviewElementTransform)
     }
   },
@@ -94,7 +99,13 @@ export default withMermaid(defineConfig({
             text: '世界设定',
             items: [
               { text: '世界概览', link: '/zh_cn/world/' },
-              { text: '概念与术语', link: '/zh_cn/concepts/' },
+              { 
+                text: '概念与术语',
+                 link: '/zh_cn/concepts/', 
+                items: [
+                  { text: '技术', link: '/zh_cn/concepts/technology' },
+                ]
+               },
               { 
                 text: '地点与星球', 
                 link: '/zh_cn/locations/', 
