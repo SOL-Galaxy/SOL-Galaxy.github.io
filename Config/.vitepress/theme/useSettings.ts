@@ -32,6 +32,20 @@ const defaultConfig: SettingsConfig = {
           defaultValue: true
         }
       ]
+    },
+    {
+      id: 'music',
+      title: '音乐播放器',
+      description: '管理背景音乐播放',
+      items: [
+        {
+          key: 'enableMusicPlayer',
+          label: '启用音乐播放器',
+          description: '在页面右下角显示音乐播放器',
+          type: 'boolean',
+          defaultValue: true
+        }
+      ]
     }
   ]
 }

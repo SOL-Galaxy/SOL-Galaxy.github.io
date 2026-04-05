@@ -7,6 +7,7 @@ import { initMarkdownWorldview } from 'markdown-worldview/client'
 import { useReadingProgress } from './useReadingProgress'
 import NotFound from './NotFound.vue'
 import Settings from './Settings.vue'
+import MusicPlayer from './MusicPlayer.vue'
 import { 
   NolebaseEnhancedReadabilitiesMenu, 
   NolebaseEnhancedReadabilitiesScreenMenu,
@@ -99,4 +100,7 @@ watch(() => route.path, async (newPath) => {
       <NolebaseEnhancedReadabilitiesScreenMenu />
     </template>
   </DefaultTheme.Layout>
+  
+  <!-- 音乐播放器（全局固定在右下角） -->
+  <MusicPlayer />
 </template>
