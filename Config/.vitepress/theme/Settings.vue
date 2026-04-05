@@ -30,24 +30,46 @@
 
           <!-- 内容区域 -->
           <div class="vp-settings-content">
-            <!-- 空状态提示 -->
-            <div v-if="config.groups.length === 0" class="vp-settings-empty">
-              <svg class="vp-settings-empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-              <p class="vp-settings-empty-text">暂无配置项</p>
-              <p class="vp-settings-empty-hint">设置项将在未来版本中添加</p>
-            </div>
-
-            <!-- 未来可以在这里添加设置项 -->
-            <!-- <div v-for="group in config.groups" :key="group.id" class="vp-settings-group">
-              <h3>{{ group.title }}</h3>
-              <div v-for="item in group.items" :key="item.key">
-                {{ item.label }}
+            <!-- 设置项分组 -->
+            <div v-for="group in config.groups" :key="group.id" class="vp-settings-group">
+              <div class="vp-settings-group-header">
+                <h3 class="vp-settings-group-title">{{ group.title }}</h3>
+                <p v-if="group.description" class="vp-settings-group-desc">{{ group.description }}</p>
               </div>
-            </div> -->
+              
+              <div class="vp-settings-items">
+                <div v-for="item in group.items" :key="item.key" class="vp-settings-item">
+                  <!-- 布尔类型 - 开关 -->
+                  <template v-if="item.type === 'boolean'">
+                    <div class="vp-settings-item-content">
+                      <div class="vp-settings-item-info">
+                        <span class="vp-settings-item-label">{{ item.label }}</span>
+                        <span v-if="item.description" class="vp-settings-item-desc">{{ item.description }}</span>
+                      </div>
+                      <label class="vp-settings-switch">
+                        <input 
+                          type="checkbox" 
+                          :checked="getSettingValue(item.key, item.defaultValue)"
+                          @change="handleToggle(item.key, $event)"
+                        />
+                        <span class="vp-settings-switch-slider"></span>
+                      </label>
+                    </div>
+                  </template>
+                </div>
+              </div>
+
+              <!-- 阅读进度管理（仅在阅读分组显示） -->
+              <div v-if="group.id === 'reading'" class="vp-settings-progress-actions">
+                <button class="vp-settings-action-btn" @click="handleClearProgress">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  </svg>
+                  清除所有阅读进度
+                </button>
+              </div>
+            </div>
           </div>
 
           <!-- 底部操作栏 -->
@@ -87,7 +109,7 @@ import { ref } from 'vue'
 import { useSettings } from './useSettings'
 
 // 使用设置 composable
-const { config, exportSettings, importSettings, resetSettings } = useSettings()
+const { config, exportSettings, importSettings, resetSettings, getSetting, setSetting } = useSettings()
 
 // 面板状态
 const isOpen = ref(false)
@@ -151,6 +173,39 @@ function handleReset() {
   if (confirm('确定要重置所有设置吗？此操作无法撤销。')) {
     resetSettings()
     alert('设置已重置')
+  }
+}
+
+/**
+ * 处理开关切换
+ */
+function handleToggle(key: string, event: Event) {
+  const checked = (event.target as HTMLInputElement).checked
+  setSetting(key, checked)
+  console.log(`[Settings] ${key} = ${checked}`)
+}
+
+/**
+ * 获取设置值（带默认值）
+ */
+function getSettingValue(key: string, defaultValue: any): any {
+  const value = getSetting(key)
+  return value !== undefined ? value : defaultValue
+}
+
+/**
+ * 清除所有阅读进度
+ */
+function handleClearProgress() {
+  if (confirm('确定要清除所有阅读进度记录吗?此操作无法撤销。')) {
+    try {
+      localStorage.removeItem('vitepress-reading-progress')
+      alert('阅读进度已清除')
+      console.log('[Settings] Reading progress cleared')
+    } catch (error) {
+      console.error('[Settings] Failed to clear reading progress:', error)
+      alert('清除失败，请查看控制台')
+    }
   }
 }
 </script>
@@ -251,6 +306,164 @@ function handleReset() {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
+}
+
+/* 设置分组 */
+.vp-settings-group {
+  margin-bottom: 24px;
+}
+
+.vp-settings-group:last-child {
+  margin-bottom: 0;
+}
+
+.vp-settings-group-header {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--vp-c-divider-light);
+}
+
+.vp-settings-group-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.vp-settings-group-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+
+/* 设置项列表 */
+.vp-settings-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vp-settings-item {
+  padding: 12px;
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider-light);
+  border-radius: 8px;
+  transition: all 0.25s;
+}
+
+.vp-settings-item:hover {
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-default-soft);
+}
+
+.vp-settings-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.vp-settings-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vp-settings-item-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+.vp-settings-item-desc {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  line-height: 1.5;
+}
+
+/* 开关按钮 */
+.vp-settings-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.vp-settings-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.vp-settings-switch-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--vp-c-divider);
+  border-radius: 24px;
+  transition: all 0.25s;
+}
+
+.vp-settings-switch-slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.25s;
+}
+
+.vp-settings-switch input:checked + .vp-settings-switch-slider {
+  background-color: var(--vp-c-brand-1);
+}
+
+.vp-settings-switch input:checked + .vp-settings-switch-slider:before {
+  transform: translateX(20px);
+}
+
+.vp-settings-switch:hover .vp-settings-switch-slider {
+  opacity: 0.8;
+}
+
+/* 阅读进度操作按钮 */
+.vp-settings-progress-actions {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--vp-c-divider-light);
+}
+
+.vp-settings-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.vp-settings-action-btn:hover {
+  color: var(--vp-c-danger-1);
+  border-color: var(--vp-c-danger-1);
+  background-color: var(--vp-c-danger-soft);
+}
+
+.vp-settings-action-btn svg {
+  flex-shrink: 0;
 }
 
 /* 空状态 */

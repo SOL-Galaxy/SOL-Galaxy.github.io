@@ -28,18 +28,7 @@ import { createSettingsAPI } from './useSettings'
 
 export default {
   extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-      'not-found': () => h(NotFound),
-      // 阅读增强菜单 + 设置按钮
-      'nav-bar-content-after': () => [
-        h(NolebaseEnhancedReadabilitiesMenu),
-        h(Settings)
-      ],
-      'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu),
-    })
-  },
+  Layout,
   enhanceApp({ app, router, siteData }) {
     // 注册 Inline Link Preview 插件
     app.use(NolebaseInlineLinkPreviewPlugin)

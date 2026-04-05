@@ -42,7 +42,7 @@ avatar: /images/characters/caili.png
 description: 外来星系流浪科学家，真名彩璃。掌握先进的超空间物理学知识，目标是制造超空间引擎返回故乡。因脑中的知识被财团/灵裔双方重点关注，因在α星卖水被财团通缉，目前隐居于Sol-5。曾与星溯达成互助合作，在星溯协助其收集引擎材料后，透露关键情报并赠予航天器和武器作为答谢。将返乡视为唯一目标，愿意承担一切代价。
 dictum: "无论付出什么代价，我都要回家"
 tags: [重要角色, ESFJ, 外来科学家, 超空间物理学, Sol-5]
-link: caili
+link: /zh_cn/characters/caili
 ```
 
 ```card
