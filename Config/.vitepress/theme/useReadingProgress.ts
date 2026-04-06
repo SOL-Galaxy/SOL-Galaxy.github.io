@@ -227,14 +227,20 @@ export function useReadingProgress() {
     // 重置状态
     hasRestored.value = false
     
-    // 保存为最后访问的页面
-    saveLastPage(path)
-    
-    // 恢复滚动位置（仅当返回到最后访问的页面时）
+    // 先检查是否返回到上次访问的页面
     const lastPage = getLastPage()
-    if (lastPage === path) {
+    const isReturningToLastPage = lastPage === path
+    
+    if (isReturningToLastPage) {
+      // 返回到上次访问的页面，恢复滚动位置
       restoreScrollPosition()
+    } else {
+      // 切换到新页面，重置滚动到顶部
+      window.scrollTo({ top: 0, behavior: 'auto' })
     }
+    
+    // 保存为新的最后访问页面
+    saveLastPage(path)
   }
 
   /**

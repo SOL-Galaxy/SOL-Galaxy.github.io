@@ -119,6 +119,7 @@ export default withMermaid(defineConfig({
                       { text: '总结与反思', link: '/zh_cn/concepts/technology/summary' }
                     ]
                   },
+                  {text:"单兵武器", link: '/zh_cn/concepts/rail-weapons' }
                 ]
                },
               { 
@@ -156,6 +157,7 @@ export default withMermaid(defineConfig({
                 link: '/zh_cn/organizations/', 
                 items: [
                   { text: '财团', link: '/zh_cn/organizations/the-ogas-consortium' },
+                  { text: '双星政府', link: '/zh_cn/organizations/twin-star-government' },
                   { text: '黎明之剑', link: '/zh_cn/organizations/dawn-blade' },
                 ] 
               },
@@ -237,7 +239,14 @@ export default withMermaid(defineConfig({
             text: 'Characters & Factions',
             items: [
               { text: 'Characters', link: '/en/characters/' },
-              { text: 'Organizations', link: '/en/organizations/' },
+              { text: 'Organizations', 
+                link: '/en/organizations/', 
+                items: [
+                  { text: 'The Ogas Consortium', link: '/en/organizations/the-ogas-consortium' },
+                  { text: 'Twin Star Government', link: '/en/organizations/twin-star-government' },
+                  { text: 'Dawn Blade', link: '/en/organizations/dawn-blade' },
+                ] 
+              },
               { text: 'Creatures & Races', link: '/en/creatures/' },
             ]
           },
