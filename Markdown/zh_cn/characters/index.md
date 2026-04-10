@@ -31,7 +31,7 @@ link: /zh_cn/characters/yezi
 
 ```card
 name: 星湛
-description: 星溯和星源的父亲，性别男，因某些原因被财团通缉，之后就再也没有消息了。
+description: 星溯和星源的父亲，最后一个熵澜能量的人类使用者，性别男，因某些原因被财团通缉，之后就再也没有消息了。
 tags: [重要角色, 科学家, 被通缉, 失踪]
 link: /zh_cn/characters/xingzhan
 ```
